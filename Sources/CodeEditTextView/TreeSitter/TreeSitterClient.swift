@@ -87,8 +87,7 @@ final class TreeSitterClient: HighlightProviding {
             return textView.stringForRange(range)?.data(using: String.nativeUTF16Encoding)
         }
 
-        let (oldTree, newTree) = self.calculateNewState(edit: edit,
-                                                        readBlock: readFunction)
+        let (oldTree, newTree) = self.calculateNewState(edit: edit, readBlock: readFunction)
 
         if oldTree == nil && newTree == nil {
             // There was no existing tree, make a new one and return all indexes.
@@ -97,12 +96,15 @@ final class TreeSitterClient: HighlightProviding {
             return
         }
 
+        // FIXME: - the ranges is not valid
         let effectedRanges = self.changedByteRanges(oldTree, rhs: newTree).map { $0.range }
+        print("the effect ranges = \(effectedRanges)")
 
         var rangeSet = IndexSet()
         effectedRanges.forEach { range in
             rangeSet.insert(integersIn: Range(range)!)
         }
+
         completion(rangeSet)
     }
 

@@ -125,6 +125,7 @@ public class STTextViewController: NSViewController, STTextViewDelegate, ThemeAt
         rulerView.font = NSFont.monospacedDigitSystemFont(ofSize: 9.5, weight: .regular)
         scrollView.verticalRulerView = rulerView
         scrollView.rulersVisible = true
+        print("the language = \(self.language.id)")
 
         textView.defaultParagraphStyle = self.paragraphStyle
         textView.font = self.font
@@ -292,6 +293,7 @@ public class STTextViewController: NSViewController, STTextViewDelegate, ThemeAt
                 return self?.textView.textContentStorage.textStorage?.mutableString.substring(with: range)
             }
 
+            // MARK: - set default highlighter
             provider = try? TreeSitterClient(codeLanguage: language, textProvider: textProvider)
         }
 

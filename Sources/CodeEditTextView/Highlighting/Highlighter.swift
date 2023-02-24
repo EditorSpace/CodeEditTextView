@@ -280,10 +280,14 @@ extension Highlighter: NSTextStorageDelegate {
         highlightProvider?.applyEdit(textView: self.textView,
                                      range: range,
                                      delta: delta) { [weak self] invalidatedIndexSet in
+            for item in invalidatedIndexSet {
+                print("the index set = \(item)")
+            }
             let indexSet = invalidatedIndexSet
                 .union(IndexSet(integersIn: editedRange))
-                // Only invalidate indices that aren't visible.
+//                 Only invalidate indices that aren't visible.
                 .intersection(self?.visibleSet ?? .init())
+            print("the final index set = \(indexSet)")
 
             for range in indexSet.rangeView {
                 self?.invalidate(range: NSRange(range))
