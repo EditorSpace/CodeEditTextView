@@ -67,6 +67,10 @@ public class STTextViewController: NSViewController, STTextViewDelegate, ThemeAt
 
     /// The provided highlight provider.
     private var highlightProvider: HighlightProviding?
+    
+    internal lazy var lspClient: LSPClient =  {
+      return LSPClient()
+    }()
 
     // MARK: Init
 

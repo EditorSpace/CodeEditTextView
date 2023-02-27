@@ -27,7 +27,12 @@ let package = Package(
         .package(
             url: "https://github.com/ChimeHQ/TextFormation",
             from: "0.6.7"
-        )
+        ),
+        .package(
+            url: "https://github.com/ChimeHQ/ProcessEnv",
+            from: "0.3.1"
+        ),
+        .package(path: "../LanguageClient"),
     ],
     targets: [
         .target(
@@ -35,13 +40,14 @@ let package = Package(
             dependencies: [
                 "STTextView",
                 "CodeEditLanguages",
-                "TextFormation"
-            ],
-            plugins: [
-                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
+                "TextFormation",
+                "ProcessEnv",
+                "LanguageClient"
             ]
+//            plugins: [
+//                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
+//            ]
         ),
-
         .testTarget(
             name: "CodeEditTextViewTests",
             dependencies: [
